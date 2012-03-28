@@ -1,0 +1,17 @@
+{
+  "name": "thoth",
+  "description": "Thoth Database",
+  "author": "Eirik Brandtzæg <eirikb@eirikb.no>",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "dynamo": ""
+  },
+  "subdomain": "thoth",
+  "scripts": {
+    "start": "thoth.js"
+  },
+  "engines": {
+    "node": "v0.6.x"
+  }
+}
