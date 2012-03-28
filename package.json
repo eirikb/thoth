@@ -3,13 +3,9 @@
   "description": "Thoth Database",
   "author": "Eirik Brandtzæg <eirikb@eirikb.no>",
   "version": "0.0.1",
-  "private": true,
+  "main": "app.js",
   "dependencies": {
-    "dynamo": ""
-  },
-  "subdomain": "thoth",
-  "scripts": {
-    "start": "thoth.js"
+    "dynamo": "0.2.x"
   },
   "engines": {
     "node": "v0.6.x"

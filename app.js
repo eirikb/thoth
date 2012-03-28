@@ -1,4 +1,5 @@
 var dynamo = db = require('dynamo');
+/*
 
 var access = require(__dirname + '/access.json'),
 db = dynamo.createClient(access);
@@ -9,7 +10,6 @@ table.fetch(function(err) {
     if (!err) console.log('Ready');
 });
 
-/*
 table.put({
     id: "123",
     name: "eirikb"
