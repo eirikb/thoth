@@ -40,7 +40,9 @@ function get(id, version, cb) {
     if (arguments.length === 2) cb = version;
     else id = id + '/' + version;
 
-    if (!cb) cb = function(){};
+    if (!cb) cb = function() {};
+
+    console.log('Reading', id);
 
     table.get({
         key: id
@@ -51,7 +53,7 @@ function getJSON(id, version, cb) {
     if (arguments.length === 2) cb = version;
     else id = id + '/' + version;
 
-    if (!cb) cb = function(){};
+    if (!cb) cb = function() {};
 
     get(id, function(err, data) {
         if (err) {
@@ -68,7 +70,9 @@ function getJSON(id, version, cb) {
 }
 
 function create(id, data, cb) {
-    if (!cb) cb = function(){};
+    if (!cb) cb = function() {};
+
+    console.log('Creating', id);
 
     try {
         data = JSON.stringify(data);
@@ -81,8 +85,54 @@ function create(id, data, cb) {
     }
 }
 
+function show(id, version, req, res) {
+    if (id) {
+        getJSON(id, function(err, parent) {
+            var data = {
+                error: false,
+                id: id,
+                versions: parseInt(parent.versions, 10),
+                created: new Date(parent.created),
+                data: false
+            };
+            if (!err && ! parent) err = 'Unkown id: ' + id;
+            if (!err && parent) {
+                getJSON(id, version, function(err, item) {
+                    if (err) {
+                        data.error = err;
+                        res.render('show', data);
+                    } else {
+                        data.version = parseInt(version, 10);
+                        data.data = item;
+
+                        res.render('show', data);
+                    }
+                });
+            } else {
+                data.error = err;
+                res.render('show', data);
+            }
+        });
+    } else {
+        res.render('show', {
+            error: 'Unkown id'
+        });
+    }
+}
+
 app.get('/', function(req, res) {
     res.render('index');
+});
+
+app.get('/show/:id/:version', function(req, res) {
+    show(req.params.id, req.params.version, req, res);
+});
+
+app.get('/show/:id', function(req, res) {
+    var id = req.params.id;
+    getJSON(id, function(err, parent) {
+        res.redirect('/show/' + id + '/' + parent.versions);
+    });
 });
 
 app.get('/read/:id/:version', function(req, res) {
@@ -136,6 +186,7 @@ app.post('/create', function(req, res) {
                 id = id + '/1';
                 create(id, b.data, function(err) {
                     if (err) res.send('Error: ' + err);
+                    else if (b.fromPage) res.redirect('/show/' + id);
                     else res.send(id);
                 });
             }
@@ -146,10 +197,11 @@ app.post('/create', function(req, res) {
 });
 
 app.post('/create/:id', function(req, res) {
-    var b = req.body;
+    var b = req.body,
+    id = req.params.id;
 
     if (b.data) {
-        getJSON(req.params.id, function(err, data) {
+        getJSON(id, function(err, data) {
             if (err) {
                 res.send('Error:' + err);
             } else if (!data) {
@@ -158,11 +210,12 @@ app.post('/create/:id', function(req, res) {
                 data.versions++;
 
                 // Update parent
-                create(req.params.id, data);
+                create(id, data);
 
-                create(req.params.id + '/' + data.versions, b.data, function(err) {
+                create(id + '/' + data.versions, b.data, function(err) {
                     if (err) res.send('Error:' + err);
-                    res.send(req.params.id + '/' + data.versions);
+                    else if (b.fromPage) res.redirect('/show/' + id + '/' + data.versions);
+                    else res.send(id + '/' + data.versions);
                 });
             }
         });

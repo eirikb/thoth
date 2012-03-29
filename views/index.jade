@@ -2,6 +2,7 @@ extends layout
 
 block content
   form.well.form-horizontal(method='post', action='/create', novalidate)
+    input(type='hidden', name='fromPage', value='true')
     fieldset
       legend Create some data
       .control-group
@@ -10,10 +11,4 @@ block content
           textarea#data.input-xlarge(name='data', rows=5)
           p Any textual data in form of a string. JSON or XML for example.
       .form-actions
-        button.btn.btn-primary(type='submit') Create
-        p
-          span#info.label.label-info.hide
-        p
-          a#raw.hide
-        p
-          a#edit.hide
+        button#create.btn.btn-primary(type='submit') Create
