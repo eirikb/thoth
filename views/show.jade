@@ -6,6 +6,8 @@ block content
     
   if data
     .well
+      h1
+        a(href='/read/#{id}/#{version}')= id + '/' + version
       p Itemid: #{id}
       p Version: #{version}
       p Created: #{created}

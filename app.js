@@ -88,34 +88,37 @@ function create(id, data, cb) {
 function show(id, version, req, res) {
     if (id) {
         getJSON(id, function(err, parent) {
-            var data = {
-                error: false,
-                id: id,
-                versions: parseInt(parent.versions, 10),
-                created: new Date(parent.created),
-                data: false
-            };
-            if (!err && ! parent) err = 'Unkown id: ' + id;
-            if (!err && parent) {
-                getJSON(id, version, function(err, item) {
-                    if (err) {
-                        data.error = err;
-                        res.render('show', data);
-                    } else {
-                        data.version = parseInt(version, 10);
-                        data.data = item;
+            if (parent) {
+                var data = {
+                    error: false,
+                    id: id,
+                    versions: parseInt(parent.versions, 10),
+                    created: new Date(parent.created),
+                    data: false
+                };
+                if (!err && ! parent) err = 'Unkown id: ' + id;
+                if (!err && parent) {
+                    getJSON(id, version, function(err, item) {
+                        if (err) {
+                            data.error = err;
+                            res.render('show', data);
+                        } else {
+                            data.version = parseInt(version, 10);
+                            data.data = item;
 
-                        res.render('show', data);
-                    }
-                });
+                            res.render('show', data);
+                        }
+                    });
+                } else {
+                    data.error = err;
+                    res.render('show', data);
+                }
             } else {
-                data.error = err;
-                res.render('show', data);
+                res.render('show', {
+                    data: false,
+                    error: 'Unkown id'
+                });
             }
-        });
-    } else {
-        res.render('show', {
-            error: 'Unkown id'
         });
     }
 }
@@ -131,7 +134,8 @@ app.get('/show/:id/:version', function(req, res) {
 app.get('/show/:id', function(req, res) {
     var id = req.params.id;
     getJSON(id, function(err, parent) {
-        res.redirect('/show/' + id + '/' + parent.versions);
+        if (parent) res.redirect('/show/' + id + '/' + parent.versions);
+        else res.redirect('/show/' + id + '/herp');
     });
 });
 
