@@ -27,12 +27,12 @@ block append container
           | 3dfa0bf09875baaa/1
         p Read item data
         pre 
-          | $ curl http://thoth.jit.su/3dfa0bf09875baaa/1
+          | $ curl http://thoth.jit.su/read/3dfa0bf09875baaa/1
           | 
           | Hello, world
         p Read item parent data
         pre
-          | $ curl http://thoth.jit.su/3dfa0bf09875baaa
+          | $ curl http://thoth.jit.su/read/3dfa0bf09875baaa
           | 
           | {"versions":1,"created":1333020739557}
         p Create new version
