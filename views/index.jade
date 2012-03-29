@@ -12,3 +12,31 @@ block content
           p Any textual data in form of a string. JSON or XML for example.
       .form-actions
         button#create.btn.btn-primary(type='submit') Create
+
+block append container
+  section
+    .page-header
+      h1 Usage
+    h2 curl
+    .row
+      .span12
+        p Create item
+        pre 
+          | $ curl -d "data=Hello, world" http://thoth.jit.su/create
+          | 
+          | 3dfa0bf09875baaa/1
+        p Read item data
+        pre 
+          | $ curl http://thoth.jit.su/3dfa0bf09875baaa/1
+          | 
+          | Hello, world
+        p Read item parent data
+        pre
+          | $ curl http://thoth.jit.su/3dfa0bf09875baaa
+          | 
+          | {"versions":1,"created":1333020739557}
+        p Create new version
+        pre
+          | curl -d "data=Hello, world again" http://thoth.jit.su/create/3dfa0bf09875baaa
+          | 
+          | 3dfa0bf09875baaa/2
