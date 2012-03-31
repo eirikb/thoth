@@ -6,17 +6,17 @@ html
       meta(charset='utf-8')
 
       link(rel='stylesheet', href='/united.min.css')
+      style h1 { padding-top: 60px; }
       include tracking.jade
   body
     .container
       block container
         .row
           .span12
-            header.jumbotron.subhead
+            header.title
               h1 
                 a(href='/') Thoth 
                 small Free open public create-read database
         section
           .row
-            .span12
-              block content
+            block content

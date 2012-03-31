@@ -8,17 +8,17 @@ block append head
   script(src='prettify.js')
 
 block content
-  form.well.form-horizontal(method='post', action='/create', novalidate)
-    input(type='hidden', name='fromPage', value='true')
-    fieldset
-      legend Create some data
-      .control-group
-        label.control-label(for='data') Data
-        .controls
-          textarea#data.input-xlarge(name='data', rows=5)
+  .span6
+    form.well.form-horizontal(method='post', action='/create', novalidate)
+      input(type='hidden', name='fromPage', value='true')
+      fieldset
+        legend Create a 
+          i thoth
+          textarea#data.span5(name='data', rows=8)
           p Any textual data in form of a string. JSON or XML for example.
-      .form-actions
         button#create.btn.btn-primary(type='submit') Create
+  .span6
+    img(src='thoth.png')
 
 block append container
   section

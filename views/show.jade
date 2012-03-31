@@ -1,42 +1,43 @@
 extends layout
 
 block content
-  if error
-    div.alert.alert-error= error
-    
-  if data
-    .well
-      h1
-        a(href='/read/#{id}/#{version}')= id + '/' + version
-      p Itemid: #{id}
-      p Version: #{version}
-      p Created: #{created}
-      if versions > 1
-        .pagination
-          ul
-            if version > 1
-              li
-                a(href='/show/#{id}/#{version - 1}') Prev
-            - for (var i = 1; i <= versions; i++)
-              if i === version
-                li.active
-                  a(href='/show/#{id}/#{i}')= i
-              else 
+  .span12
+    if error
+      div.alert.alert-error= error
+      
+    if data
+      .well
+        h1
+          a(href='/read/#{id}/#{version}')= id + '/' + version
+        p Itemid: #{id}
+        p Version: #{version}
+        p Created: #{created}
+        if versions > 1
+          .pagination
+            ul
+              if version > 1
                 li
-                  a(href='/show/#{id}/#{i}')= i
-            if version < versions
-              li
-                a(href='/show/#{id}/#{version + 1}') Next
+                  a(href='/show/#{id}/#{version - 1}') Prev
+              - for (var i = 1; i <= versions; i++)
+                if i === version
+                  li.active
+                    a(href='/show/#{id}/#{i}')= i
+                else 
+                  li
+                    a(href='/show/#{id}/#{i}')= i
+              if version < versions
+                li
+                  a(href='/show/#{id}/#{version + 1}') Next
 
-  if data
-    form.well.form-horizontal(method='post', action='/create/#{id}', novalidate)
-      input(type='hidden', name='fromPage', value='true')
-      fieldset
-        legend Create new version
-        .control-group
-          label.control-label(for='data') Data
-          .controls
-            textarea#data.input-xlarge(name='data', rows=5)= data
-            p Any textual data in form of a string. JSON or XML for example.
-        .form-actions
-          button#create.btn.btn-primary(type='submit') Create new version
+    if data
+      form.well.form-horizontal(method='post', action='/create/#{id}', novalidate)
+        input(type='hidden', name='fromPage', value='true')
+        fieldset
+          legend Create new version
+          .control-group
+            label.control-label(for='data') Data
+            .controls
+              textarea#data.input-xlarge(name='data', rows=5)= data
+              p Any textual data in form of a string. JSON or XML for example.
+          .form-actions
+            button#create.btn.btn-primary(type='submit') Create new version
