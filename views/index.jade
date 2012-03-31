@@ -48,21 +48,21 @@ block append container
       .span12
         p Create item
         pre.prettyprint
-          | $ curl -d "data=Hello, world" http://thoth.jit.su/create
+          | $ curl -d "data=Hello, world" http://thoth.io/create
           | 
           | 3dfa0bf09875baaa/1
         p Read item data
         pre.prettyprint
-          | $ curl http://thoth.jit.su/read/3dfa0bf09875baaa/1
+          | $ curl http://thoth.io/read/3dfa0bf09875baaa/1
           | 
           | Hello, world
         p Read item parent data
         pre.prettyprint
-          | $ curl http://thoth.jit.su/read/3dfa0bf09875baaa
+          | $ curl http://thoth.io/read/3dfa0bf09875baaa
           | 
           | {"versions":1,"created":1333020739557}
         p Create new version
         pre.prettyprint
-          | curl -d "data=Hello, world again" http://thoth.jit.su/create/3dfa0bf09875baaa
+          | curl -d "data=Hello, world again" http://thoth.io/create/3dfa0bf09875baaa
           | 
           | 3dfa0bf09875baaa/2
