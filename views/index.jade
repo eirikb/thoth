@@ -8,16 +8,16 @@ block append head
   script(src='prettify.js')
 
 block content
-  .span6
+  .span8
     form.well.form-horizontal(method='post', action='/create', novalidate)
       input(type='hidden', name='fromPage', value='true')
       fieldset
         legend Create a 
           i thoth
-          textarea#data.span5(name='data', rows=8)
-          p Any textual data in form of a string. JSON or XML for example.
+        textarea#data.span5(name='data', rows=8)
+        p Any textual data in form of a string. JSON or XML for example.
         button#create.btn.btn-primary(type='submit') Create
-  .span6
+  .span4
     img(src='thoth.png')
 
 block append container
