@@ -1,5 +1,12 @@
 extends layout
 
+block append head
+  link(rel='stylesheet', href='http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.css')
+  script(src='http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js')
+  script(src='http://code.jquery.com/jquery.min.js')
+  script(src='thoth.jquery.min.js')
+  script(src='prettify.js')
+
 block content
   form.well.form-horizontal(method='post', action='/create', novalidate)
     input(type='hidden', name='fromPage', value='true')
@@ -17,6 +24,21 @@ block append container
   section
     .page-header
       h1 Usage
+    h2 JavaScript
+    .row
+      .span12
+        p Add this to your scripts:
+        pre.prettyprint
+          <script src="http://thoth.io/thoth.jquery.min.js"></script>
+        p This should do the trick:
+        pre.prettyprint.linenums
+          | thoth.create('Hello, world', function(id) {
+          |   console.log('id:', id);
+          |   thoth.read(id, function(data) {
+          |     console.log(data);
+          |   });
+          | });
+        p Try the previous code snippet in your console on this page!
     h2 curl
     .row
       .span12
