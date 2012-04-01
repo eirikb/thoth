@@ -2,7 +2,7 @@ exports.version = function(err, data, req, res, contentType) {
     if (!res.header('content-type')) res.contentType('json');
 
     // Remove stuff we don't need for version rendering
-    delete data.id;
+    if (data) delete data.id;
 
     if (err) {
         res.send('Error: ' + err, 500)
