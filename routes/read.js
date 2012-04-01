@@ -10,6 +10,7 @@ exports.thoth = function(req, res) {
 
     thoth.get(id, function(err, data) {
         if (attr) {
+            res.header('content-type', 'text/plain');
             render.version(err, data[attr], req, res);
         } else {
             if (version) render.version(err, data, req, res);

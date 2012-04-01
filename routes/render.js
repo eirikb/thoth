@@ -1,5 +1,5 @@
-exports.version = function(err, data, req, res) {
-    res.contentType('json');
+exports.version = function(err, data, req, res, contentType) {
+    if (!res.header('content-type')) res.contentType('json');
 
     // Remove stuff we don't need for version rendering
     delete data.id;
@@ -19,7 +19,8 @@ exports.version = function(err, data, req, res) {
 };
 
 exports.parent = function(err, data, req, res) {
-    res.contentType('json');
+    if (!res.header('content-type')) res.contentType('json');
+
     if (err) {
         res.send({
             message: 'Error: ' + err

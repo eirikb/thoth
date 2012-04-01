@@ -46,23 +46,28 @@ block append container
     h2 curl
     .row
       .span12
-        p Create item
+        p Create thoth parent
+        pre 
+          | $ curl -d "data=Hello, world" http://thoth.io
+        pre.prettyprint 
+          | {"id":"b55a829f4ffdcf86","versions":1,"timestamp":1333279933768}
+        p Read thoth parent (same result as when creating)
+        pre
+          | $ curl http://thoth.io/b55a829f4ffdcf86
         pre.prettyprint
-          | $ curl -d "data=Hello, world" http://thoth.io/create
-          | 
-          | 3dfa0bf09875baaa/1
-        p Read item data
+          | {"versions":1,"id":"b55a829f4ffdcf86","timestamp":1333279933768}
+        p Read thoth version
+        pre
+          | $ curl http://thoth.io/b55a829f4ffdcf86/1
         pre.prettyprint
-          | $ curl http://thoth.io/read/3dfa0bf09875baaa/1
-          | 
-          | Hello, world
-        p Read item parent data
-        pre.prettyprint
-          | $ curl http://thoth.io/read/3dfa0bf09875baaa
-          | 
-          | {"versions":1,"created":1333020739557}
+          | {"data":"Hello, world","timestamp":1333279934131}
         p Create new version
+        pre
+          | $ curl -d "data=Hello, world again" http://thoth.io/b55a829f4ffdcf86
         pre.prettyprint
-          | curl -d "data=Hello, world again" http://thoth.io/create/3dfa0bf09875baaa
-          | 
-          | 3dfa0bf09875baaa/2
+          | {"versions":2,"id":"b55a829f4ffdcf86","timestamp":1333279933768}
+        p Read only data of the new thoth version (.timestamp will also work)
+        pre
+          | $ curl http://thoth.io/b55a829f4ffdcf86/2.data
+        pre
+          | Hello, world again
