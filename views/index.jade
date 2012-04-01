@@ -14,14 +14,62 @@ block content
       fieldset
         legend Create a 
           i thoth
-        textarea#data.span5(name='data', rows=8)
+        textarea.span5(name='data', rows=8)
         p Any textual data in form of a string. JSON or XML for example.
-        button#create.btn.btn-primary(type='submit') Create
+        button.btn.btn-primary(type='submit') Create
   .span4
     img(src='/static/thoth.png')
 
 block append container
-  section
+  section#overview
+    .page-header
+      h1 Overview 
+    .row
+      .span12
+        p 
+          :markdown
+            **Thoth** is a _CREATE_ and _READ_ database. There are no usersnames or passwords, 
+            only data. It is similar to a normal pastebin, 
+            except that it can be used by anyone and for anything. 
+            It could for instance be used as backend to a pastebin or even frontend through 
+            cross-domain JavaScript. It can also be used as a backup database for your 
+            [tiny](https://github.com/chjj/node-tiny) or 
+            [nstore](https://github.com/creationix/nstore) databases, 
+            just create a _thoth_ and keep pushing whole files to it.
+    h2 Examples
+    .row
+      .span12
+        ul.thumbnails
+          li.span4
+            a.thumbnail(href='http://eirikb.github.com/thoth-cli')
+              p Github pages pastebin (thoth frontend)
+              img(src='/static/ex1.png')
+          li.span4
+            a.thumbnail(href='http://pivot.jit.su')
+              p CSS and JS pivot (thoth backend)
+              img(src='/static/ex2.png')
+    h2 How it works
+    .row
+      span12
+        .span4
+          ul
+            li No username or password
+            li Support only 
+              i CREATE 
+              | and
+              i READ
+            li Support 
+              i Cross-domain
+              | JavaScript
+            li App hosted by 
+              a(href='http://nodejitsu.com') nodejitsu.com
+            li Data stores in 
+              a(href='http://aws.amazon.com/dynamodb') AWS Dynamo DB 
+              span (NoSQL)
+        .span8
+          img.span7(src='/static/thoth1.png')
+
+  section#usage
     .page-header
       h1 Usage  
         small Some clients can be found on 

@@ -9,7 +9,7 @@
     "express": "2.5.x",
     "jade": "",
     "dynamo": "0.2.x",
-    "connect-xcors": ""
+    "markdown": ""
   },
   "subdomain": "thoth",
   "domains": [

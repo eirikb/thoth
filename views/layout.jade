@@ -6,9 +6,21 @@ html
       meta(charset='utf-8')
 
       link(rel='stylesheet', href='/static/united.min.css')
-      style .title h1 { padding-top: 60px; }
+      style .title h1 { padding-top: 100px; } section { padding-top: 30px; }
     include tracking.jade
   body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          a.brand(href='/') Thoth
+          ul.nav
+            li
+              a(href='#') Create
+            li
+              a(href='#overview') Overview
+            li
+              a(href='#usage') Usage
+
     .container
       block container
         .row
@@ -17,6 +29,14 @@ html
               h1 
                 a(href='/') Thoth 
                 small Free open public create-read database
-        section
           .row
             block content
+      hr
+      footer.footer
+        p Made by 
+          a(href='https://github.com/eirikb') eirikb
+        p Hosted by 
+          a(href='http://nodejitsu.com') nodejitsu.com
+        p Database by 
+          a(href='http://aws.amazon.com/dynamodb') AWS Dynamo DB 
+
