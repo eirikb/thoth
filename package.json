@@ -3,7 +3,7 @@
   "description": "Thoth Database",
   "author": "Eirik Brandtzæg <eirikb@eirikb.no>",
   "main": "app.js",
-  "version": "0.0.5",
+  "version": "0.0.5-1",
   "private": true,
   "dependencies": {
     "express": "2.5.x",
