@@ -82,28 +82,19 @@ block append container
         pre.prettyprint
           <script src="http://code.jquery.com/jquery.min.js"></script>
           <script src="https://raw.github.com/eirikb/thoth-cli/master/javascript/thoth.jquery.min.js"></script>
-        p This should do the trick:
-        pre.prettyprint.linenums
-          | thoth.create('Hello, world', function(error, parent) {
-          |   console.log('id:', parent.id);
-          |   thoth.read(parent.id + '/1', function(error, item) {
-          |     console.log(item.data);
-          |   });
-
-          |   // Same as
-          |   thoth.read(parent.id + '/1.data', function(error, data) {
-          |     console.log(data);
-          |   });
-          | });
-        p Try the previous code snippet in your console on this page!
     h2 Node.js
     .row
       .span12
         pre $ npm install thoth
-        p Use the module like this:
+        p Require the module
         pre.prettyprint.linenums
           | var thoth = require('thoth');
-          | 
+
+    h2 JavaScript / Node.js usage
+    .row
+      .span12
+        p Same code for both Node.js and browser
+        pre.prettyprint
           | thoth.create('Hello, world', function(error, parent) {
           |   console.log('id', parent.id);
           | 
