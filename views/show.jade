@@ -4,40 +4,42 @@ block content
   .span12
     if error
       div.alert.alert-error= error
-      
-    if data
+
+    else
       .well
-        h1
-          a(href='/read/#{id}/#{version}')= id + '/' + version
-        p Itemid: #{id}
-        p Version: #{version}
-        p Created: #{created}
-        if versions > 1
+        h3 Parent thoth: 
+          a(href='/#{parent.id}')= parent.id 
+        p Versions: #{parent.versions}
+        p Created: #{parent.timestamp}
+      .well
+        h3 Thoth version: 
+          a(href='/#{thoth.id}')= thoth.id
+        if thoth.timestamp
+          p Created: #{thoth.timestamp}
+        if parent.versions > 1
           .pagination
             ul
               if version > 1
                 li
-                  a(href='/show/#{id}/#{version - 1}') Prev
-              - for (var i = 1; i <= versions; i++)
+                  a(href='/show/#{parent.id}/#{version - 1}') Prev
+              - for (var i = 1; i <= parent.versions; i++)
                 if i === version
                   li.active
-                    a(href='/show/#{id}/#{i}')= i
+                    a(href='/show/#{parent.id}/#{i}')= i
                 else 
                   li
-                    a(href='/show/#{id}/#{i}')= i
-              if version < versions
+                    a(href='/show/#{parent.id}/#{i}')= i
+              if version < parent.versions
                 li
-                  a(href='/show/#{id}/#{version + 1}') Next
-
-    if data
-      form.well.form-horizontal(method='post', action='/create/#{id}', novalidate)
+                  a(href='/show/#{parent.id}/#{version + 1}') Next
+      form.well.form-horizontal(method='post', action='/#{parent.id}', novalidate)
         input(type='hidden', name='fromPage', value='true')
         fieldset
           legend Create new version
           .control-group
             label.control-label(for='data') Data
             .controls
-              textarea#data.input-xlarge(name='data', rows=5)= data
+              textarea#data.input-xlarge(name='data', rows=5)= thoth.data
               p Any textual data in form of a string. JSON or XML for example.
           .form-actions
             button#create.btn.btn-primary(type='submit') Create new version

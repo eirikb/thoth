@@ -5,11 +5,11 @@ block append head
   script(src='http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js')
   script(src='http://code.jquery.com/jquery.min.js')
   script(src='https://raw.github.com/eirikb/thoth-cli/master/javascript/thoth.jquery.min.js')
-  script(src='prettify.js')
+  script(src='/static/prettify.js')
 
 block content
   .span8
-    form.well.form-horizontal(method='post', action='/create', novalidate)
+    form.well.form-horizontal(method='post', action='/', novalidate)
       input(type='hidden', name='fromPage', value='true')
       fieldset
         legend Create a 
@@ -18,7 +18,7 @@ block content
         p Any textual data in form of a string. JSON or XML for example.
         button#create.btn.btn-primary(type='submit') Create
   .span4
-    img(src='thoth.png')
+    img(src='/static/thoth.png')
 
 block append container
   section
