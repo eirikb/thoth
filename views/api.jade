@@ -1,0 +1,75 @@
+table.table.table-striped.table-bordered
+  thead
+    tr
+      th Method
+      th URL
+      th Send
+      th Reply
+      th Description
+      th Reply type
+      th Example
+  tbody
+    tr
+      td POST
+      td /
+      td data
+      td Parent thoth
+      td Create a parent thoth + 1 version
+      td JSON
+      td
+    tr
+      td POST
+      td /:id
+      td data
+      td Parent thoth
+      td Create new version
+      td JSON
+      td
+    tr
+      td GET
+      td /:id
+      td
+      td Parent thoth
+      td
+      td JSON
+      td
+        a(href='/bb47de3a8ed6ba24') /bb47..24
+    tr
+      td GET
+      td /:id/:version
+      td
+      td Thoth version
+      td
+      td JSON
+      td
+        a(href='/bb47de3a8ed6ba24/1') /bb47..24/1
+    tr
+      td GET
+      td /:id/-:version
+      td
+      td Thoth version
+      td From last version and back
+      td JSON
+      td
+        a(href='/bb47de3a8ed6ba24/-1') /bb47..24/-1
+    tr
+      td GET
+      td /:id/:version.data
+      td
+      td Return thoth version attribute
+      td Works with all attrs such as .timestamp
+      td text/plain
+      td
+        a(href='/bb47de3a8ed6ba24/1.data') /bb47..24/1.data
+    tr
+      td GET
+      td /:id/:from
+        strong :
+        | :to
+      td
+      td Return range of thoth versions
+      td Currently does not support negative values
+      td JSON
+      td
+        a(href='/bb47de3a8ed6ba24/1:2') /bb47..24/1:2
+
