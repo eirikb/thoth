@@ -1,15 +1,15 @@
-var thoth = require('../thoth.js');
+var db = require('../db.js');
 
 function show(id, version, req, res) {
     if (id) {
-        thoth.get(id, function(err, parent) {
+        db.get(id, function(err, parent) {
             if (parent) {
                 var model = {
                     error: false
                 };
                 if (!err && ! parent) err = 'Unkown id: ' + id;
                 if (!err && parent) {
-                    thoth.get(id + '/' + version, function(err, item) {
+                    db.get(id + '/' + version, function(err, item) {
                         if (err) {
                             model.error = err;
                             res.render('show', model);
@@ -46,7 +46,7 @@ exports.version = function(req, res, next) {
 exports.id = function(req, res) {
     var id = req.params.id;
 
-    thoth.get(id, function(err, parent) {
+    db.get(id, function(err, parent) {
         if (parent) res.redirect('/show/' + id + '/' + parent.versions);
         else res.redirect('/show/' + id + '/herp');
     });

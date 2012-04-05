@@ -1,10 +1,10 @@
-var thoth = require('../thoth.js'),
+var db = require('../db.js'),
 render = require('./render.js');
 
 function get(id, req, res, isParent) {
     var attr = req.params.attr;
 
-    thoth.get(id, function(err, data) {
+    db.get(id, function(err, data) {
         if (attr) {
             res.header('content-type', 'text/plain');
             render.version(err, data[attr], req, res);
@@ -24,7 +24,7 @@ exports.thoth = function(req, res) {
             id = id + '/' + version;
             get(id, req, res);
         } else {
-            thoth.get(id, function(err, data) {
+            db.get(id, function(err, data) {
                 var versions;
                 if (data) {
                     versions = parseInt(data.versions, 10);
@@ -47,7 +47,7 @@ exports.range = function(req, res) {
     from = Math.min(i1, i2);
     to = Math.max(i1, i2) + 1;
 
-    thoth.range(id, from, to, function(err, data) {
+    db.range(id, from, to, function(err, data) {
         render.version(err, data, req, res);
     });
 };

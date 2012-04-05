@@ -1,4 +1,4 @@
-var thoth = require('../thoth.js'),
+var db = require('../db.js'),
 render = require('./render.js');
 
 function S4() {
@@ -9,7 +9,7 @@ function guid() {
 }
 
 function create(parent, body, req, res) {
-    thoth.create(parent, function(err) {
+    db.create(parent, function(err) {
         var data;
         if (err) {
             res.send({
@@ -23,7 +23,7 @@ function create(parent, body, req, res) {
                 timestamp: Date.now(),
                 data: body.data
             };
-            thoth.create(data, function(err) {
+            db.create(data, function(err) {
                 // Redirect to show-page if posted from thoth.io
                 if (body.fromPage) res.redirect('/show/' + data.id);
                 else render.parent(err, parent, req, res);
@@ -57,7 +57,7 @@ exports.version = function(req, res) {
     res.contentType('json');
 
     if (body && body.data) {
-        thoth.get(id, function(err, data) {
+        db.get(id, function(err, data) {
             if (err) {
                 res.send('Error:' + err);
             } else if (!data) {
@@ -68,7 +68,7 @@ exports.version = function(req, res) {
             } else {
                 // Update parent
                 data.versions++;
-                thoth.create(data);
+                db.create(data);
 
                 create(data, body, req, res);
             }
