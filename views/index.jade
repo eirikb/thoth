@@ -108,7 +108,7 @@ block append container
               td
               td JSON
               td
-                a(href='/b55a829f4ffdcf86') /b55a..86
+                a(href='/bb47de3a8ed6ba24') /bb47..24
             tr
               td GET
               td /:id/:version
@@ -117,7 +117,7 @@ block append container
               td
               td JSON
               td
-                a(href='/b55a829f4ffdcf86/1') /b55a..86/1
+                a(href='/bb47de3a8ed6ba24/1') /bb47..24/1
             tr
               td GET
               td /:id/-:version
@@ -126,7 +126,7 @@ block append container
               td From last version and back
               td JSON
               td
-                a(href='/b55a829f4ffdcf86/-1') /b55a..86/-1
+                a(href='/bb47de3a8ed6ba24/-1') /bb47..24/-1
             tr
               td GET
               td /:id/:version.data
@@ -135,7 +135,7 @@ block append container
               td Works with all attrs such as .timestamp
               td text/plain
               td
-                a(href='/b55a829f4ffdcf86/1.data') /b55a..86/1.data
+                a(href='/bb47de3a8ed6ba24/1.data') /bb47..24/1.data
             tr
               td GET
               td /:id/:from
@@ -146,7 +146,7 @@ block append container
               td Currently does not support negative values
               td JSON
               td
-                a(href='/b55a829f4ffdcf86/1:2') /b55a..86/1:2
+                a(href='/bb47de3a8ed6ba24/1:2') /bb47..24/1:2
 
   section#clients
     .page-header
@@ -200,24 +200,30 @@ block append container
         pre 
           | $ curl -d "data=Hello, world" http://thoth.io
         pre.prettyprint 
-          | {"id":"b55a829f4ffdcf86","versions":1,"timestamp":1333279933768}
+          | {"id":"bb47de3a8ed6ba24","versions":1,"timestamp":1333627065171}
         p Read thoth parent (same result as when creating)
         pre
-          | $ curl http://thoth.io/b55a829f4ffdcf86
+          | $ curl http://thoth.io/bb47de3a8ed6ba24
         pre.prettyprint
-          | {"versions":1,"id":"b55a829f4ffdcf86","timestamp":1333279933768}
+          | {"versions":1,"id":"bb47de3a8ed6ba24","timestamp":1333627065171}
         p Read thoth version
         pre
-          | $ curl http://thoth.io/b55a829f4ffdcf86/1
+          | $ curl http://thoth.io/bb47de3a8ed6ba24/1
         pre.prettyprint
-          | {"data":"Hello, world","timestamp":1333279934131}
+          | {"version":1,"timestamp":1333627065268,"data":"Hello, world"}
         p Create new version
         pre
-          | $ curl -d "data=Hello, world again" http://thoth.io/b55a829f4ffdcf86
+          | $ curl -d "data=Hello, world again" http://thoth.io/bb47de3a8ed6ba24
         pre.prettyprint
-          | {"versions":2,"id":"b55a829f4ffdcf86","timestamp":1333279933768}
+          | {"versions":2,"id":"bb47de3a8ed6ba24","timestamp":1333627065171}
         p Read only data of the new thoth version (.timestamp will also work)
         pre
-          | $ curl http://thoth.io/b55a829f4ffdcf86/2.data
+          | $ curl http://thoth.io/bb47de3a8ed6ba24/2.data
         pre
           | Hello, world again
+        p Read the last version
+        pre
+          | $ curl http://thoth.io/bb47de3a8ed6ba24/-1.data
+        pre
+          | Hello, world again
+
