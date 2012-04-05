@@ -3,13 +3,15 @@
   "description": "Thoth Database",
   "author": "Eirik Brandtzæg <eirikb@eirikb.no>",
   "main": "app.js",
-  "version": "0.0.5-5",
+  "version": "0.0.6",
   "private": true,
   "dependencies": {
-    "express": "2.5.x",
+    "express": "",
     "jade": "",
-    "dynamo": "0.2.x",
-    "markdown": ""
+    "dynamo": "",
+    "markdown": "",
+    "mocha": "",
+    "should": ""
   },
   "subdomain": "thoth",
   "domains": [
