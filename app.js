@@ -7,8 +7,9 @@ port = process.env.PORT || 3000;
 // http://stackoverflow.com/a/7069902
 var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,POST');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    // Might not need these
+    //res.header('Access-Control-Allow-Methods', 'GET,POST');
+    //res.header('Access-Control-Allow-Headers', 'Content-Type');
     next();
 }
 
@@ -44,6 +45,8 @@ app.get('/', function(req, res) {
 app.get('/show/:id/:version', routes.show.version);
 
 app.get('/show/:id', routes.show.id);
+
+app.get('/:id/:from\::to', routes.read.range);
 
 app.get('/:id/:version.:attr', routes.read.thoth);
 

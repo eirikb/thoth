@@ -19,10 +19,12 @@ function create(parent, body, req, res) {
         } else {
             data = {
                 id: parent.id + '/' + parent.versions,
+                version: parent.versions,
                 timestamp: Date.now(),
                 data: body.data
             };
             thoth.create(data, function(err) {
+                // Redirect to show-page if posted from thoth.io
                 if (body.fromPage) res.redirect('/show/' + data.id);
                 else render.parent(err, parent, req, res);
             });
