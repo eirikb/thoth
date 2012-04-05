@@ -3,8 +3,6 @@ extends layout
 block append head
   link(rel='stylesheet', href='http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.css')
   script(src='http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js')
-  script(src='http://code.jquery.com/jquery.min.js')
-  script(src='https://raw.github.com/eirikb/thoth-cli/master/javascript/thoth.jquery.min.js')
   script(src='/static/prettify.js')
 
 block content
@@ -36,18 +34,6 @@ block append container
             [tiny](https://github.com/chjj/node-tiny) or 
             [nstore](https://github.com/creationix/nstore) databases, 
             just create a _thoth_ and keep pushing whole files to it.
-    h2 Examples
-    .row
-      .span12
-        ul.thumbnails
-          li.span4
-            a.thumbnail(href='http://eirikb.github.com/thoth-cli')
-              p Github pages pastebin (thoth frontend)
-              img(src='/static/ex1.png')
-          li.span4
-            a.thumbnail(href='http://pivot.jit.su')
-              p CSS and JS pivot (thoth backend)
-              img(src='/static/ex2.png')
     h2 How it works
     .row
       span12
@@ -69,9 +55,102 @@ block append container
         .span8
           img.span7(src='/static/thoth1.png')
 
-  section#usage
+    h2 Examples
+    .row
+      .span12
+        ul.thumbnails
+          li.span4
+            a.thumbnail(href='http://eirikb.github.com/thoth-cli')
+              p Github pages pastebin (thoth frontend)
+              img(src='/static/ex1.png')
+          li.span4
+            a.thumbnail(href='http://pivot.jit.su')
+              p CSS and JS pivot (thoth backend)
+              img(src='/static/ex2.png')
+
+  section#api
     .page-header
-      h1 Usage  
+      h2#api API
+    .row
+      .span12
+        table.table.table-striped.table-bordered
+          thead
+            tr
+              th Method
+              th URL
+              th Send
+              th Reply
+              th Description
+              th Reply type
+              th Example
+          tbody
+            tr
+              td POST
+              td /
+              td data
+              td Parent thoth
+              td Create a parent thoth + 1 version
+              td JSON
+              td
+            tr
+              td POST
+              td /:id
+              td data
+              td Parent thoth
+              td Create new version
+              td JSON
+              td
+            tr
+              td GET
+              td /:id
+              td
+              td Parent thoth
+              td
+              td JSON
+              td
+                a(href='/b55a829f4ffdcf86') /b55a..86
+            tr
+              td GET
+              td /:id/:version
+              td
+              td Thoth version
+              td
+              td JSON
+              td
+                a(href='/b55a829f4ffdcf86/1') /b55a..86/1
+            tr
+              td GET
+              td /:id/-:version
+              td
+              td Thoth version
+              td From last version and back
+              td JSON
+              td
+                a(href='/b55a829f4ffdcf86/-1') /b55a..86/-1
+            tr
+              td GET
+              td /:id/:version.data
+              td
+              td Return thoth version attribute
+              td Works with all attrs such as .timestamp
+              td text/plain
+              td
+                a(href='/b55a829f4ffdcf86/1.data') /b55a..86/1.data
+            tr
+              td GET
+              td /:id/:from
+                strong :
+                | :to
+              td
+              td Return range of thoth versions
+              td Currently does not support negative values
+              td JSON
+              td
+                a(href='/b55a829f4ffdcf86/1:2') /b55a..86/1:2
+
+  section#clients
+    .page-header
+      h1 Clients 
         small Some clients can be found on 
           a(href='https://github.com/eirikb/thoth-cli') github
     h2 JavaScript 
@@ -90,7 +169,7 @@ block append container
         pre.prettyprint.linenums
           | var thoth = require('thoth');
 
-    h2 JavaScript / Node.js usage
+    h2 JavaScript / Node.js client
     .row
       .span12
         p Same code for both Node.js and browser
